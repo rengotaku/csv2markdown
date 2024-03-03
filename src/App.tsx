@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import { TopPage } from './pages/TopPage'
 import { Grid, GridItem } from '@chakra-ui/react'

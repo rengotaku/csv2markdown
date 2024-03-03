@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
+// @ts-expect-error: I do not know how to treat
 import DataGridXL from '@datagridxl/datagridxl2';
-import { Card, CardBody, Checkbox, Textarea, Container, Center, Divider, useClipboard, useToast, Button } from '@chakra-ui/react'
+import { Card, CardBody, Textarea, Container, Center, useClipboard, useToast } from '@chakra-ui/react'
 
 export const TopPage: React.FunctionComponent = () => {
   const DELIMITER = " | ";
@@ -8,8 +9,9 @@ export const TopPage: React.FunctionComponent = () => {
   const dgxlRef = useRef(null);
   const toast = useToast();
 
-  const changeHandler = function(gridEvent){
-    const tableData = dgxlRef.current.grid.getData();
+  const changeHandler = function(){
+    // @ts-expect-error: I do not know how to treat
+    const tableData = dgxlRef.current!["grid"].getData();
 
     if (tableData.length === 0) {
       setValue("");
@@ -32,7 +34,7 @@ export const TopPage: React.FunctionComponent = () => {
     }
 
     // values
-    tableData.slice(1, tableData.length).forEach(function (cols) {
+    tableData.slice(1, tableData.length).forEach(function (cols: [string[]]) {
       tstr += DELIMITER + cols.join(DELIMITER) + DELIMITER + "\r\n";
     })
 
@@ -42,13 +44,15 @@ export const TopPage: React.FunctionComponent = () => {
   // similar to componentDidMount and componentDidUpdate
   useEffect(() => {
 
-    if(!dgxlRef.current.grid){
+    if(!dgxlRef.current!["grid"]){
       // create only once
-      dgxlRef.current.grid = new DataGridXL(dgxlRef.current, {
+      // @ts-expect-error: I do not know how to treat
+      dgxlRef.current!["grid"] = new DataGridXL(dgxlRef.current, {
         data: [[""]],
         rowHeaderWidth: 40,
       });
-      dgxlRef.current.grid.events.on('change', changeHandler);
+      // @ts-expect-error: I do not know how to treat
+      dgxlRef.current!["grid"].events.on('change', changeHandler);
     }
   })
 
