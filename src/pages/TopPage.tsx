@@ -97,13 +97,6 @@ export const TopPage: React.FunctionComponent = () => {
           </CardBody>
         </Card>
       </Center>
-
-      <Container>
-        <div style={{color: 'rgb(100 116 139)'}}>
-          TSV2Markdown
-          | <span style={{fontSize: '10px'}}>data grid by <a href="https://datagridxl.com/" target="_blank">DataGridXL</a></span>
-        </div>
-      </Container>
     </>
   )
 }
