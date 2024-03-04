@@ -6,14 +6,14 @@ function App() {
 
   return (
     <>
-<Grid templateColumns='repeat(1, 1fr)' gap={6}>
-  <GridItem w='100%'>
-    <h1>TSV2Markdown</h1>
-  </GridItem>
-  <GridItem w='100%'>
-      <TopPage></TopPage>
-  </GridItem>
-</Grid>
+      <Grid templateColumns='repeat(1, 1fr)' gap={6}>
+        <GridItem w='100%'>
+          <h1>TSV2Markdown</h1>
+        </GridItem>
+        <GridItem w='100%'>
+            <TopPage></TopPage>
+        </GridItem>
+      </Grid>
     </>
   )
 }

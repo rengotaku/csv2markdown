@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 // @ts-expect-error: I do not know how to treat
 import DataGridXL from '@datagridxl/datagridxl2';
-import { Card, CardBody, Textarea, Container, Center, useClipboard, useToast } from '@chakra-ui/react'
+import { Card, CardBody, Textarea, Container, Center, useClipboard, useToast, Button } from '@chakra-ui/react'
 
 export const TopPage: React.FunctionComponent = () => {
   const DELIMITER = " | ";
@@ -41,18 +41,24 @@ export const TopPage: React.FunctionComponent = () => {
     setValue(tstr);
   };
 
+  const resetDataGlid = function(){
+    // create only once
+    // @ts-expect-error: I do not know how to treat
+    dgxlRef.current["grid"] = new DataGridXL(dgxlRef.current, {
+      data: [[""]],
+      rowHeaderWidth: 40,
+    });
+    // @ts-expect-error: I do not know how to treat
+    dgxlRef.current["grid"].events.on('change', changeHandler);
+
+    setValue("");
+  };
+
   // similar to componentDidMount and componentDidUpdate
   useEffect(() => {
-
-    if(!dgxlRef.current!["grid"]){
-      // create only once
-      // @ts-expect-error: I do not know how to treat
-      dgxlRef.current!["grid"] = new DataGridXL(dgxlRef.current, {
-        data: [[""]],
-        rowHeaderWidth: 40,
-      });
-      // @ts-expect-error: I do not know how to treat
-      dgxlRef.current!["grid"].events.on('change', changeHandler);
+    // @ts-expect-error: I do not know how to treat
+    if(!dgxlRef.current["grid"]){
+      resetDataGlid();
     }
   })
 
@@ -61,6 +67,9 @@ export const TopPage: React.FunctionComponent = () => {
       <Center as='section' mb={2}>
         <Card>
           <CardBody>
+            <Button colorScheme='teal' onClick={() => {
+              resetDataGlid();
+            }}>Clear</Button>
             <div ref={dgxlRef} style={{height: '500px', width: '48vw'}} />
           </CardBody>
         </Card>
