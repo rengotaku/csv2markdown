@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 // @ts-expect-error: I do not know how to treat
 import DataGridXL from '@datagridxl/datagridxl2';
-import { Card, CardBody, Textarea, Container, Center, useClipboard, useToast, Button } from '@chakra-ui/react'
+import { Card, CardBody, Textarea, Center, useClipboard, useToast, Button } from '@chakra-ui/react'
 
 export const TopPage: React.FunctionComponent = () => {
   const DELIMITER = " | ";
