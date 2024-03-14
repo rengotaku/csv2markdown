@@ -32,5 +32,5 @@ export default {
 # Setting up for building
 ```
 $ npm install
-$ npm dev
+$ npm run dev
 ```

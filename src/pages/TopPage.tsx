@@ -1,10 +1,13 @@
 import React, { useRef, useEffect } from 'react'
 // @ts-expect-error: I do not know how to treat
 import DataGridXL from '@datagridxl/datagridxl2';
-import { Card, CardBody, Textarea, Center, useClipboard, useToast, Button } from '@chakra-ui/react'
+import { Card, CardBody, Textarea, Center, useClipboard, useToast, Button, Alert, AlertIcon } from '@chakra-ui/react'
 
 export const TopPage: React.FunctionComponent = () => {
-  const DELIMITER = " | ";
+  const DELIMITER = "|";
+  const DELIMITER_HEAD = `${DELIMITER} `;
+  const DELIMITER_BACK = ` ${DELIMITER}`;
+  const DELIMITER_ITEMS = ` ${DELIMITER} `;
   const { onCopy, value, setValue } = useClipboard("");
   const dgxlRef = useRef(null);
   const toast = useToast();
@@ -20,22 +23,23 @@ export const TopPage: React.FunctionComponent = () => {
 
     let tstr = "";
     // Titles of header
-    tstr += DELIMITER + tableData[0].join(DELIMITER) + DELIMITER;
+    tstr += DELIMITER_HEAD + tableData[0].join(DELIMITER_ITEMS) + DELIMITER_BACK;
     tstr += "\r\n";
 
     // Dividers of header
-    tstr += "|" + tableData[0].map(function () { return "---" }).join("|") + "|";
+    tstr += DELIMITER + tableData[0].map(function () { return "---" }).join(DELIMITER) + DELIMITER;
     tstr += "\r\n";
 
     if (tableData.length === 1) {
-      tstr += DELIMITER + tableData[0].map(function () { return "dummy" }).join(DELIMITER) + DELIMITER;
+      tstr += DELIMITER_HEAD + tableData[0].map(function () { return "dummy" }).join(DELIMITER_ITEMS) + DELIMITER_BACK;
       tstr += "\r\n";
       setValue(tstr);
+      return;
     }
 
     // values
     tableData.slice(1, tableData.length).forEach(function (cols: [string[]]) {
-      tstr += DELIMITER + cols.join(DELIMITER) + DELIMITER + "\r\n";
+      tstr += DELIMITER_HEAD + cols.join(DELIMITER_ITEMS) + DELIMITER_BACK + "\r\n";
     })
 
     setValue(tstr);
@@ -67,9 +71,13 @@ export const TopPage: React.FunctionComponent = () => {
       <Center as='section' mb={2}>
         <Card>
           <CardBody>
-            <Button colorScheme='teal' onClick={() => {
+            <Button colorScheme='teal' mb={2} onClick={() => {
               resetDataGlid();
             }}>Clear</Button>
+            <Alert status='info'>
+              <AlertIcon />
+              Copy from Excel or Spreadsheet, then pasted !
+            </Alert>
             <div ref={dgxlRef} style={{height: '500px', width: '48vw'}} />
           </CardBody>
         </Card>
