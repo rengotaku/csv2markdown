@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
-    "@datagridxl/datagridxl2": "^2.0.20",
+    "@datagridxl/datagridxl2": "file:vendor/datagridxl-datagridxl2-2.0.20.tgz",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "framer-motion": "^11.0.8",
